@@ -1,0 +1,28 @@
+﻿.kampusly-student-layout {
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr);
+  align-items: start;
+  width: 100%;
+  min-height: 100vh;
+  background: #f7f9f7;
+}
+
+.kampusly-student-content {
+  min-width: 0;
+  width: 100%;
+}
+
+.kampusly-student-content > * {
+  min-width: 0;
+}
+
+@media (max-width: 800px) {
+  .kampusly-student-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .kampusly-student-content {
+    width: 100%;
+    max-width: 100%;
+  }
+}

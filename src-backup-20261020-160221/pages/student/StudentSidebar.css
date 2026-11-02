@@ -1,0 +1,248 @@
+.kampusly-sidebar {
+--sidebar-green: #126e51;
+--sidebar-green-dark: #0c523c;
+--sidebar-charcoal: #101713;
+--sidebar-lime: #b8f36b;
+--sidebar-muted: #68736c;
+--sidebar-border: #e3eae5;
+
+width: 245px;
+min-width: 245px;
+min-height: calc(100vh - 76px);
+padding: 22px 15px 18px;
+
+display: flex;
+flex-direction: column;
+
+position: sticky;
+top: 76px;
+align-self: start;
+
+background: #ffffff;
+border-right: 1px solid var(--sidebar-border);
+
+font-family: Inter, Arial, sans-serif;
+color: var(--sidebar-charcoal);
+box-sizing: border-box;
+}
+
+.kampusly-sidebar *,
+.kampusly-sidebar *::before,
+.kampusly-sidebar *::after {
+box-sizing: border-box;
+}
+
+.kampusly-sidebar button {
+font: inherit;
+cursor: pointer;
+}
+
+.kampusly-sidebar-brand {
+display: flex;
+align-items: center;
+gap: 10px;
+
+width: 100%;
+padding: 0 8px 24px;
+margin-bottom: 10px;
+
+color: var(--sidebar-charcoal);
+background: transparent;
+border: 0;
+
+text-align: left;
+font-size: 23px;
+font-weight: 800;
+letter-spacing: -1px;
+}
+
+.kampusly-sidebar-brand-mark {
+display: grid;
+place-items: center;
+
+width: 40px;
+height: 40px;
+flex-shrink: 0;
+
+color: #ffffff;
+background: var(--sidebar-green);
+border-radius: 12px;
+}
+
+.kampusly-sidebar-brand-dot {
+color: var(--sidebar-green);
+}
+
+.kampusly-sidebar-navigation {
+display: flex;
+flex-direction: column;
+gap: 25px;
+}
+
+.kampusly-sidebar-group {
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+
+.kampusly-sidebar-label {
+margin: 0 12px 10px;
+
+color: #89948d;
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 1.3px;
+}
+
+.kampusly-sidebar-link {
+position: relative;
+
+display: flex;
+align-items: center;
+gap: 12px;
+
+width: 100%;
+min-height: 45px;
+padding: 0 13px;
+
+color: #59655e;
+background: transparent;
+border: 0;
+border-radius: 10px;
+
+text-align: left;
+font-size: 13px;
+font-weight: 550;
+
+transition:
+background 0.18s ease,
+color 0.18s ease;
+}
+
+.kampusly-sidebar-link > svg {
+flex-shrink: 0;
+}
+
+.kampusly-sidebar-link > span:first-of-type {
+flex: 1;
+}
+
+.kampusly-sidebar-link:hover {
+color: var(--sidebar-green);
+background: #edf3ee;
+}
+
+.kampusly-sidebar-link.active {
+color: var(--sidebar-green);
+background: #e6f2e9;
+font-weight: 750;
+}
+
+.kampusly-sidebar-indicator {
+position: absolute;
+right: 0;
+
+width: 3px;
+height: 23px;
+
+background: var(--sidebar-green);
+border-radius: 3px;
+}
+
+.kampusly-sidebar-bottom {
+margin-top: auto;
+padding-top: 28px;
+}
+
+.kampusly-sidebar-help {
+padding: 16px;
+
+background: #f8faf8;
+border: 1px solid var(--sidebar-border);
+border-radius: 13px;
+}
+
+.kampusly-sidebar-help-icon {
+display: grid;
+place-items: center;
+
+width: 35px;
+height: 35px;
+margin-bottom: 12px;
+
+color: var(--sidebar-green);
+background: #e7f3e9;
+border-radius: 10px;
+}
+
+.kampusly-sidebar-help strong {
+display: block;
+font-size: 12px;
+line-height: 1.5;
+}
+
+.kampusly-sidebar-help p {
+margin: 6px 0 0;
+
+color: var(--sidebar-muted);
+font-size: 11px;
+line-height: 1.7;
+}
+
+.kampusly-sidebar-logout {
+display: flex;
+align-items: center;
+gap: 11px;
+
+width: 100%;
+min-height: 43px;
+padding: 0 13px;
+margin-top: 13px;
+
+color: #68736c;
+background: transparent;
+border: 1px solid transparent;
+border-radius: 10px;
+
+text-align: left;
+font-size: 12px;
+font-weight: 650;
+}
+
+.kampusly-sidebar-logout:hover {
+color: #b33d3d;
+background: #fff0f0;
+}
+
+@media (max-width: 1100px) {
+.kampusly-sidebar {
+width: 215px;
+min-width: 215px;
+padding-right: 11px;
+padding-left: 11px;
+}
+
+.kampusly-sidebar-brand {
+font-size: 21px;
+}
+
+.kampusly-sidebar-link {
+gap: 10px;
+padding-right: 10px;
+padding-left: 10px;
+}
+}
+
+@media (max-width: 800px) {
+.kampusly-sidebar {
+display: none;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+.kampusly-sidebar *,
+.kampusly-sidebar *::before,
+.kampusly-sidebar *::after {
+transition: none !important;
+}
+}

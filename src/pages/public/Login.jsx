@@ -1,0 +1,372 @@
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Eye,
+  EyeOff,
+  GraduationCap,
+  CheckCircle2,
+  ShieldCheck,
+  LockKeyhole,
+  Mail,
+  Check,
+} from "lucide-react";
+import { apiRequest, saveSession } from "../../lib/api";
+
+const initialForm = {
+  email: "",
+  password: "",
+  rememberMe: false,
+};
+
+function Login() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [form, setForm] = useState(initialForm);
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+
+    setErrors((previous) => ({
+      ...previous,
+      [name]: "",
+      form: "",
+    }));
+
+    setSuccessMessage("");
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!form.email.trim()) {
+      newErrors.email = "Please enter your email address.";
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())
+    ) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!form.password) {
+      newErrors.password = "Please enter your password.";
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setSuccessMessage("");
+
+    const validationErrors = validateForm();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    try {
+      const data = await apiRequest("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: form.email.trim(),
+          password: form.password,
+        }),
+      });
+
+      if (!data.token || !data.user) {
+        throw new Error("The server returned an incomplete login response.");
+      }
+
+      saveSession(data.token, data.user);
+
+      setSuccessMessage(data.message || "Login successful.");
+      const destination = location.state?.from;
+      navigate(
+        typeof destination === "string" && destination.startsWith("/student/")
+          ? destination
+          : "/student/dashboard",
+        { replace: true }
+      );
+    } catch (error) {
+      setErrors((previous) => ({
+        ...previous,
+        form: error.message || "Unable to sign in. Please try again.",
+      }));
+    }
+  };
+
+  return (
+    <main className="login-page">
+      <header className="login-header">
+        <Link
+          to="/"
+          className="login-brand"
+          aria-label="Kampusly home"
+        >
+          <span className="login-brand-icon">
+            <GraduationCap size={25} strokeWidth={2.2} />
+          </span>
+
+          <span className="login-brand-name">
+            kampusly<span>.</span>
+          </span>
+        </Link>
+
+        <Link to="/" className="login-back-link">
+          <ArrowLeft size={17} />
+          <span>Back to home</span>
+        </Link>
+      </header>
+
+      <section className="login-layout">
+        <aside className="login-intro">
+          <div className="login-intro-badge">
+            <span className="login-badge-dot" />
+            WELCOME BACK TO YOUR COMMUNITY
+          </div>
+
+          <h1>
+            Your campus,
+            <br />
+            <span>your people.</span>
+          </h1>
+
+          <p className="login-intro-description">
+            Everything you need for campus life is waiting for you.
+            Sign in and pick up right where you left off.
+          </p>
+
+          <div className="login-benefits">
+            <div className="login-benefit">
+              <span className="login-benefit-icon">
+                <CheckCircle2 size={19} />
+              </span>
+
+              <div>
+                <strong>Your campus community</strong>
+                <p>Connect with people around you.</p>
+              </div>
+            </div>
+
+            <div className="login-benefit">
+              <span className="login-benefit-icon">
+                <CheckCircle2 size={19} />
+              </span>
+
+              <div>
+                <strong>Everything in one place</strong>
+                <p>Discover products and campus services.</p>
+              </div>
+            </div>
+
+            <div className="login-benefit">
+              <span className="login-benefit-icon">
+                <ShieldCheck size={19} />
+              </span>
+
+              <div>
+                <strong>Your account, protected</strong>
+                <p>Sign in securely to your account.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="login-quote">
+            <span className="login-quote-mark">“</span>
+            <p>Good things happen when campus connects.</p>
+            <span className="login-quote-line" />
+          </div>
+
+          <div className="login-decoration login-decoration-one" />
+          <div className="login-decoration login-decoration-two" />
+        </aside>
+
+        <section className="login-form-section">
+          <div className="login-form-card">
+            <div className="login-mobile-brand">
+              <span className="login-brand-icon">
+                <GraduationCap size={24} />
+              </span>
+
+              <span className="login-brand-name">
+                kampusly<span>.</span>
+              </span>
+            </div>
+
+            <div className="login-form-heading">
+              <span className="login-step-label">
+                YOUR COMMUNITY AWAITS
+              </span>
+
+              <h2>Welcome back!</h2>
+
+              <p>
+                Sign in to continue your Kampusly journey.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="login-field">
+                <label htmlFor="login-email">
+                  Email address
+                </label>
+
+                <div className="login-input-wrap">
+                  <Mail
+                    className="login-input-icon"
+                    size={19}
+                  />
+
+                  <input
+                    id="login-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    autoComplete="email"
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={
+                      errors.email ? "login-email-error" : undefined
+                    }
+                  />
+                </div>
+
+                {errors.email && (
+                  <span
+                    className="login-error"
+                    id="login-email-error"
+                  >
+                    {errors.email}
+                  </span>
+                )}
+              </div>
+
+              <div className="login-field">
+                <div className="login-password-heading">
+                  <label htmlFor="login-password">
+                    Password
+                  </label>
+
+                  <Link to="/forgot-password">
+                    Forgot password?
+                  </Link>
+                </div>
+
+                <div className="login-input-wrap">
+                  <LockKeyhole
+                    className="login-input-icon"
+                    size={19}
+                  />
+
+                  <input
+                    id="login-password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    value={form.password}
+                    onChange={handleChange}
+                    autoComplete="current-password"
+                    aria-invalid={Boolean(errors.password)}
+                    aria-describedby={
+                      errors.password
+                        ? "login-password-error"
+                        : undefined
+                    }
+                  />
+
+                  <button
+                    type="button"
+                    className="login-password-toggle"
+                    onClick={() =>
+                      setShowPassword((previous) => !previous)
+                    }
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOff size={19} />
+                    ) : (
+                      <Eye size={19} />
+                    )}
+                  </button>
+                </div>
+
+                {errors.password && (
+                  <span
+                    className="login-error"
+                    id="login-password-error"
+                  >
+                    {errors.password}
+                  </span>
+                )}
+              </div>
+
+              <label className="login-remember">
+                <input
+                  type="checkbox"
+                  name="rememberMe"
+                  checked={form.rememberMe}
+                  onChange={handleChange}
+                />
+
+                <span className="login-custom-checkbox">
+                  <Check size={13} strokeWidth={3} />
+                </span>
+
+                <span>Remember me</span>
+              </label>
+
+              {successMessage && (
+                <div className="login-success" role="status">
+                  <CheckCircle2 size={19} />
+                  <span>{successMessage}</span>
+                </div>
+              )}
+
+              {errors.form && (
+                <p className="login-error" role="alert">
+                  {errors.form}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="login-submit-button"
+              >
+                <span>Sign in</span>
+                <ArrowRight size={19} />
+              </button>
+            </form>
+
+            <div className="login-register-prompt">
+              Don't have an account?{" "}
+              <Link to="/register">Create an account</Link>
+            </div>
+
+            <div className="login-security-note">
+              <ShieldCheck size={16} />
+              <span>Your campus journey starts here.</span>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <footer className="login-footer">
+        <span>© {new Date().getFullYear()} Kampusly</span>
+        <span>Campus Life, Simplified.</span>
+      </footer>
+    </main>
+  );
+}
+
+export default Login;

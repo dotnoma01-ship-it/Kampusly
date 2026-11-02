@@ -1,0 +1,1544 @@
+===== KAMPUSLY AUTHENTICATION SOURCE FILES =====
+
+===== FILE: src\main.jsx =====
+
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App.jsx";
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);
+
+
+
+===== FILE: src\App.jsx =====
+
+import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import Register from "./pages/public/Register";
+import Login from "./pages/public/Login";
+import ForgotPassword from "./pages/public/ForgotPassword";
+import StudentPageLayout from "./pages/student/StudentPageLayout";
+import Dashboard from "./pages/student/Dashboard";
+import CampusFeed from "./pages/student/CampusFeed";
+import Messages from "./pages/student/Messages.jsx";
+import Profile from "./pages/student/Profile.jsx";
+import Wallet from "./pages/student/wallet/Wallet";
+import FundWallet from "./pages/student/wallet/FundWallet";
+import SendMoney from "./pages/student/wallet/SendMoney";
+import WithdrawFunds from "./pages/student/wallet/WithdrawFunds";
+import BankAccounts from "./pages/student/wallet/BankAccounts";
+import TransactionHistory from "./pages/student/transactions/TransactionHistory";
+import MyOrders from "./pages/student/orders/MyOrders";
+import Notifications from "./pages/student/notifications/Notifications";
+import Services from "./pages/student/services/Services";
+import ServiceCategory from "./pages/student/services/ServiceCategory";
+
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BookOpen,
+  Check,
+  ChevronDown,
+  Clock,
+  GraduationCap,
+  Menu,
+  MessageCircle,
+  ShieldCheck,
+  ShoppingBag,
+  Sparkles,
+  Utensils,
+  X,
+} from "lucide-react";
+
+import "./App.css";
+
+const services = [
+  {
+    icon: Utensils,
+    title: "Food & meals",
+    description:
+      "Discover meals around campus, explore menus, and order directly from student vendors.",
+    tag: "Food",
+  },
+  {
+    icon: ShoppingBag,
+    title: "Campus marketplace",
+    description:
+      "Buy and sell books, clothes, gadgets, and everyday hostel essentials.",
+    tag: "Marketplace",
+  },
+  {
+    icon: BookOpen,
+    title: "Laundry services",
+    description:
+      "Find laundry providers, compare services, and arrange a convenient collection.",
+    tag: "Services",
+  },
+  {
+    icon: MessageCircle,
+    title: "Campus community",
+    description:
+      "Share updates, ask questions, find help, and connect with other students.",
+    tag: "Community",
+  },
+];
+
+const steps = [
+  {
+    number: "01",
+    title: "Create your account",
+    description:
+      "Sign up with your details and create your personal Kampusly account.",
+  },
+  {
+    number: "02",
+    title: "Explore campus life",
+    description:
+      "Discover student posts, food, services, marketplace listings, and opportunities.",
+  },
+  {
+    number: "03",
+    title: "Connect and get things done",
+    description:
+      "Message sellers, find services, and handle your campus needs in one place.",
+  },
+];
+
+function Brand({ light = false }) {
+  return (
+    <a
+      href="/"
+      className={`brand ${light ? "brand-light" : ""}`}
+      aria-label="Kampusly homepage"
+    >
+      <span className="brand-mark">
+        <GraduationCap size={23} strokeWidth={2.4} />
+      </span>
+
+      <span className="brand-name">
+        kampusly<span>.</span>
+      </span>
+    </a>
+  );
+}
+
+function Home() {
+const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+const closeMobileMenu = () => {
+setIsMobileMenuOpen(false);
+};
+
+return ( <main>
+{/* Navigation */} <header className="site-header"> <div className="container header-inner"> <Brand />
+
+      <nav className="desktop-nav" aria-label="Main navigation">
+        <a href="#services">Explore</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#community">Community</a>
+      </nav>
+
+      <div className="header-actions">
+        <a href="/login" className="login-link">
+          Log in
+        </a>
+
+        <a href="/register" className="button button-primary header-cta">
+          Get started <ArrowUpRight size={17} />
+        </a>
+      </div>
+
+      <button
+        type="button"
+        className="mobile-menu-button"
+        aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+        aria-expanded={isMobileMenuOpen}
+        aria-controls="kampusly-mobile-nav"
+        onClick={() => setIsMobileMenuOpen((open) => !open)}
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+    </div>
+
+    <nav
+      id="kampusly-mobile-nav"
+      className={`mobile-nav ${isMobileMenuOpen ? "mobile-nav-open" : ""}`}
+      aria-label="Mobile navigation"
+      aria-hidden={!isMobileMenuOpen}
+    >
+      <a href="#services" onClick={closeMobileMenu}>
+        Explore
+      </a>
+
+      <a href="#how-it-works" onClick={closeMobileMenu}>
+        How it works
+      </a>
+
+      <a href="#community" onClick={closeMobileMenu}>
+        Community
+      </a>
+
+      <a href="/login" onClick={closeMobileMenu}>
+        Log in
+      </a>
+
+      <a href="/register" onClick={closeMobileMenu}>
+        Get started
+      </a>
+    </nav>
+  </header>
+
+
+
+      {/* Hero */}
+      <section className="hero-section" id="home">
+        <div className="container hero-grid">
+          <div className="hero-content">
+            <div className="eyebrow">
+              <span className="eyebrow-dot" />
+              YOUR CAMPUS. YOUR COMMUNITY.
+            </div>
+
+            <h1>
+              Campus life,
+              <br />
+              <span>simplified.</span>
+            </h1>
+
+            <p className="hero-description">
+              From finding your next meal to discovering useful services and
+              connecting with students, everything you need for campus life
+              belongs in one place.
+            </p>
+
+            <div className="hero-actions">
+              <a href="/register" className="button button-primary">
+                Get started for free <ArrowRight size={18} />
+              </a>
+
+              <a href="#services" className="button button-secondary">
+                Explore Kampusly
+              </a>
+            </div>
+
+            <div className="hero-trust">
+              <div className="trust-icon">
+                <ShieldCheck size={19} />
+              </div>
+
+              <p>
+                Built around students.
+                <br />
+                Designed for campus life.
+              </p>
+            </div>
+          </div>
+
+          {/* Dashboard preview */}
+          <div className="hero-visual">
+            <div className="visual-glow" />
+
+            <div className="dashboard-preview">
+              <div className="preview-topbar">
+                <Brand />
+
+                <div className="preview-avatar">S</div>
+              </div>
+
+              <div className="preview-welcome">
+                <div>
+                  <p className="preview-overline">YOUR CAMPUS SPACE</p>
+                  <h3>What's happening?</h3>
+                </div>
+
+                <span className="preview-sparkle">
+                  <Sparkles size={20} />
+                </span>
+              </div>
+
+              <div className="preview-search">
+                <span>Discover something around you...</span>
+                <ArrowRight size={17} />
+              </div>
+
+              <div className="preview-categories">
+                <div className="preview-category active">
+                  <span className="category-icon food-icon">
+                    <Utensils size={18} />
+                  </span>
+                  <span>Food</span>
+                </div>
+
+                <div className="preview-category">
+                  <span className="category-icon market-icon">
+                    <ShoppingBag size={18} />
+                  </span>
+                  <span>Market</span>
+                </div>
+
+                <div className="preview-category">
+                  <span className="category-icon service-icon">
+                    <BookOpen size={18} />
+                  </span>
+                  <span>Services</span>
+                </div>
+              </div>
+
+              <div className="preview-section-heading">
+                <h4>Campus highlights</h4>
+                <span>Explore all</span>
+              </div>
+
+              <div className="preview-card">
+                <div className="preview-card-image meal-image">
+                  <Utensils size={28} />
+                </div>
+
+                <div className="preview-card-content">
+                  <span className="preview-label">FOOD & MEALS</span>
+                  <h4>Your next favourite meal</h4>
+                  <p>Discover meals available around campus.</p>
+                </div>
+
+                <ArrowUpRight size={18} className="preview-card-arrow" />
+              </div>
+
+              <div className="preview-card">
+                <div className="preview-card-image community-image">
+                  <MessageCircle size={28} />
+                </div>
+
+                <div className="preview-card-content">
+                  <span className="preview-label">COMMUNITY</span>
+                  <h4>Connect with students</h4>
+                  <p>Find conversations and helpful updates.</p>
+                </div>
+
+                <ArrowUpRight size={18} className="preview-card-arrow" />
+              </div>
+
+              <div className="preview-bottom">
+                <span>
+                  <span className="online-dot" />
+                  Your campus community awaits
+                </span>
+
+                <Check size={16} />
+              </div>
+            </div>
+
+            <div className="floating-card floating-card-top">
+              <span className="floating-icon">
+                <Sparkles size={18} />
+              </span>
+
+              <span>
+                <strong>One campus hub</strong>
+                <small>Everything in one place</small>
+              </span>
+            </div>
+
+            <div className="floating-card floating-card-bottom">
+              <span className="floating-icon floating-icon-lime">
+                <Check size={18} />
+              </span>
+
+              <span>
+                <strong>Made for students</strong>
+                <small>Simple. Useful. Connected.</small>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-bottom container">
+          <span>DISCOVER</span>
+          <span className="hero-bottom-line" />
+          <span>CONNECT</span>
+          <span className="hero-bottom-line" />
+          <span>GET THINGS DONE</span>
+        </div>
+      </section>
+
+      {/* Introduction */}
+      <section className="intro-section" id="community">
+        <div className="container intro-grid">
+          <div className="section-label">
+            <span className="section-label-line" />
+            THE CAMPUS EXPERIENCE, REIMAGINED
+          </div>
+
+          <div className="intro-content">
+            <h2>
+              Student life comes with a lot to figure out.
+              <span> Kampusly brings it together.</span>
+            </h2>
+
+            <p>
+              Finding food, getting your laundry done, buying essentials, or
+              simply knowing what's happening around you shouldn't feel
+              complicated. Kampusly helps students discover what they need and
+              connect with the people who can help.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="services-section section-padding" id="services">
+        <div className="container">
+          <div className="section-heading">
+            <div>
+              <div className="section-label">
+                <span className="section-label-line" />
+                WHAT YOU CAN DO
+              </div>
+
+              <h2>
+                More campus life.
+                <br />
+                <span>Less hassle.</span>
+              </h2>
+            </div>
+
+            <p>
+              Your everyday campus needs, brought together in one simple,
+              student-focused experience.
+            </p>
+          </div>
+
+          <div className="services-grid">
+            {services.map((service) => {
+              const Icon = service.icon;
+
+              return (
+                <article className="service-card" key={service.title}>
+                  <div className="service-card-top">
+                    <span className="service-icon">
+                      <Icon size={23} />
+                    </span>
+
+                    <span className="service-tag">{service.tag}</span>
+                  </div>
+
+                  <h3>{service.title}</h3>
+
+                  <p>{service.description}</p>
+
+                  <a
+                    href="/register"
+                    className="service-link"
+                    aria-label={`Get started with ${service.title}`}
+                  >
+                    Explore <ArrowUpRight size={17} />
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section
+        className="steps-section section-padding"
+        id="how-it-works"
+      >
+        <div className="container">
+          <div className="section-heading steps-heading">
+            <div>
+              <div className="section-label">
+                <span className="section-label-line" />
+                GET STARTED
+              </div>
+
+              <h2>
+                Campus life,
+                <br />
+                <span>made easier.</span>
+              </h2>
+            </div>
+
+            <p>
+              No complicated process. Just create an account, explore your
+              options, and start connecting.
+            </p>
+          </div>
+
+          <div className="steps-grid">
+            {steps.map((step) => (
+              <article className="step-card" key={step.number}>
+                <span className="step-number">{step.number}</span>
+
+                <div className="step-divider" />
+
+                <h3>{step.title}</h3>
+
+                <p>{step.description}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="steps-note">
+            <Clock size={18} />
+
+            <span>
+              Get started at your own pace. Your campus journey begins with
+              one account.
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to action */}
+      <section className="cta-section">
+        <div className="container">
+          <div className="cta-panel">
+            <div className="cta-decoration cta-decoration-one" />
+            <div className="cta-decoration cta-decoration-two" />
+
+            <div className="cta-content">
+              <span className="cta-eyebrow">
+                <Sparkles size={16} /> YOUR CAMPUS, CONNECTED
+              </span>
+
+              <h2>
+                Make campus life
+                <br />
+                <span>a little simpler.</span>
+              </h2>
+
+              <p>
+                Discover useful services, connect with students, and bring
+                your everyday campus needs into one place.
+              </p>
+
+              <a href="/register" className="button button-light">
+                Join Kampusly <ArrowRight size={18} />
+              </a>
+            </div>
+
+            <div className="cta-symbol" aria-hidden="true">
+              <GraduationCap size={100} strokeWidth={1.1} />
+              <span className="cta-symbol-dot cta-symbol-dot-one" />
+              <span className="cta-symbol-dot cta-symbol-dot-two" />
+              <span className="cta-symbol-dot cta-symbol-dot-three" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="site-footer">
+        <div className="container">
+          <div className="footer-main">
+            <div className="footer-brand-column">
+              <Brand light />
+
+              <p>
+                Campus life, simplified.
+                <br />
+                A better way to discover, connect, and get things done.
+              </p>
+            </div>
+
+            <div className="footer-links-column">
+              <h4>Explore</h4>
+              <a href="#services">Campus services</a>
+              <a href="#how-it-works">How it works</a>
+              <a href="#community">Community</a>
+            </div>
+
+            <div className="footer-links-column">
+              <h4>Your account</h4>
+              <a href="/register">Create an account</a>
+              <a href="/login">Log in</a>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <p>
+              © {new Date().getFullYear()} Kampusly. All rights reserved.
+            </p>
+
+            <p>Built for campus life.</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+
+      <Route path="/register" element={<Register />} />
+
+      <Route path="/login" element={<Login />} />
+
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+
+      <Route path="/student/dashboard" element={<Dashboard />} />
+
+      <Route path="/student/feed" element={<StudentPageLayout><CampusFeed /></StudentPageLayout>} />
+
+      <Route path="/student/messages" element={<StudentPageLayout><Messages /></StudentPageLayout>} />
+
+      <Route path="/student/profile" element={<StudentPageLayout><Profile /></StudentPageLayout>} />
+
+      <Route path="/student/wallet" element={<Wallet />} />
+
+<Route path="/student/wallet/fund" element={<FundWallet />} />
+      
+    <Route path="/student/wallet/send" element={<StudentPageLayout><SendMoney /></StudentPageLayout>} />
+
+    <Route path="/student/wallet/withdraw" element={<StudentPageLayout><WithdrawFunds /></StudentPageLayout>} />
+
+    <Route path="/student/wallet/bank-account" element={<StudentPageLayout><BankAccounts /></StudentPageLayout>} />
+
+    <Route path="/student/transactions" element={<StudentPageLayout><TransactionHistory /></StudentPageLayout>} />
+
+    <Route path="/student/orders" element={<StudentPageLayout><MyOrders /></StudentPageLayout>} />
+
+    <Route path="/student/notifications" element={<StudentPageLayout><Notifications /></StudentPageLayout>} />
+
+<Route path="/student/services" element={<StudentPageLayout><Services /></StudentPageLayout>} />
+
+    <Route path="/student/services/:categoryId" element={<StudentPageLayout><ServiceCategory /></StudentPageLayout>} />
+    
+          <Route
+        path="*"
+        element={
+          <div className="not-found-page">
+            <div className="not-found-card">
+              <span className="not-found-code">404</span>
+
+              <h1>Page not found</h1>
+
+              <p>
+                Sorry, we couldn't find the page you're looking for.
+              </p>
+
+              <a href="/" className="button button-primary">
+                Back to homepage <ArrowRight size={18} />
+              </a>
+            </div>
+          </div>
+        }
+      />
+    </Routes>
+  );
+}
+
+export default App;
+
+
+===== FILE: src\pages\public\Login.jsx =====
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Eye,
+  EyeOff,
+  GraduationCap,
+  CheckCircle2,
+  ShieldCheck,
+  LockKeyhole,
+  Mail,
+  Check,
+} from "lucide-react";
+
+const initialForm = {
+  email: "",
+  password: "",
+  rememberMe: false,
+};
+
+function Login() {
+  const [form, setForm] = useState(initialForm);
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+
+    setErrors((previous) => ({
+      ...previous,
+      [name]: "",
+      form: "",
+    }));
+
+    setSuccessMessage("");
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!form.email.trim()) {
+      newErrors.email = "Please enter your email address.";
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())
+    ) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!form.password) {
+      newErrors.password = "Please enter your password.";
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setSuccessMessage("");
+
+    const validationErrors = validateForm();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
+
+    setSuccessMessage(
+      "Your details are valid. Login will be available when authentication is connected to the Kampusly server."
+    );
+  };
+
+  return (
+    <main className="login-page">
+      <header className="login-header">
+        <Link
+          to="/"
+          className="login-brand"
+          aria-label="Kampusly home"
+        >
+          <span className="login-brand-icon">
+            <GraduationCap size={25} strokeWidth={2.2} />
+          </span>
+
+          <span className="login-brand-name">
+            kampusly<span>.</span>
+          </span>
+        </Link>
+
+        <Link to="/" className="login-back-link">
+          <ArrowLeft size={17} />
+          <span>Back to home</span>
+        </Link>
+      </header>
+
+      <section className="login-layout">
+        <aside className="login-intro">
+          <div className="login-intro-badge">
+            <span className="login-badge-dot" />
+            WELCOME BACK TO YOUR COMMUNITY
+          </div>
+
+          <h1>
+            Your campus,
+            <br />
+            <span>your people.</span>
+          </h1>
+
+          <p className="login-intro-description">
+            Everything you need for campus life is waiting for you.
+            Sign in and pick up right where you left off.
+          </p>
+
+          <div className="login-benefits">
+            <div className="login-benefit">
+              <span className="login-benefit-icon">
+                <CheckCircle2 size={19} />
+              </span>
+
+              <div>
+                <strong>Your campus community</strong>
+                <p>Connect with people around you.</p>
+              </div>
+            </div>
+
+            <div className="login-benefit">
+              <span className="login-benefit-icon">
+                <CheckCircle2 size={19} />
+              </span>
+
+              <div>
+                <strong>Everything in one place</strong>
+                <p>Discover products and campus services.</p>
+              </div>
+            </div>
+
+            <div className="login-benefit">
+              <span className="login-benefit-icon">
+                <ShieldCheck size={19} />
+              </span>
+
+              <div>
+                <strong>Your account, protected</strong>
+                <p>Sign in securely to your account.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="login-quote">
+            <span className="login-quote-mark">“</span>
+            <p>Good things happen when campus connects.</p>
+            <span className="login-quote-line" />
+          </div>
+
+          <div className="login-decoration login-decoration-one" />
+          <div className="login-decoration login-decoration-two" />
+        </aside>
+
+        <section className="login-form-section">
+          <div className="login-form-card">
+            <div className="login-mobile-brand">
+              <span className="login-brand-icon">
+                <GraduationCap size={24} />
+              </span>
+
+              <span className="login-brand-name">
+                kampusly<span>.</span>
+              </span>
+            </div>
+
+            <div className="login-form-heading">
+              <span className="login-step-label">
+                YOUR COMMUNITY AWAITS
+              </span>
+
+              <h2>Welcome back!</h2>
+
+              <p>
+                Sign in to continue your Kampusly journey.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="login-field">
+                <label htmlFor="login-email">
+                  Email address
+                </label>
+
+                <div className="login-input-wrap">
+                  <Mail
+                    className="login-input-icon"
+                    size={19}
+                  />
+
+                  <input
+                    id="login-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    autoComplete="email"
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={
+                      errors.email ? "login-email-error" : undefined
+                    }
+                  />
+                </div>
+
+                {errors.email && (
+                  <span
+                    className="login-error"
+                    id="login-email-error"
+                  >
+                    {errors.email}
+                  </span>
+                )}
+              </div>
+
+              <div className="login-field">
+                <div className="login-password-heading">
+                  <label htmlFor="login-password">
+                    Password
+                  </label>
+
+                  <Link to="/forgot-password">
+                    Forgot password?
+                  </Link>
+                </div>
+
+                <div className="login-input-wrap">
+                  <LockKeyhole
+                    className="login-input-icon"
+                    size={19}
+                  />
+
+                  <input
+                    id="login-password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    value={form.password}
+                    onChange={handleChange}
+                    autoComplete="current-password"
+                    aria-invalid={Boolean(errors.password)}
+                    aria-describedby={
+                      errors.password
+                        ? "login-password-error"
+                        : undefined
+                    }
+                  />
+
+                  <button
+                    type="button"
+                    className="login-password-toggle"
+                    onClick={() =>
+                      setShowPassword((previous) => !previous)
+                    }
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOff size={19} />
+                    ) : (
+                      <Eye size={19} />
+                    )}
+                  </button>
+                </div>
+
+                {errors.password && (
+                  <span
+                    className="login-error"
+                    id="login-password-error"
+                  >
+                    {errors.password}
+                  </span>
+                )}
+              </div>
+
+              <label className="login-remember">
+                <input
+                  type="checkbox"
+                  name="rememberMe"
+                  checked={form.rememberMe}
+                  onChange={handleChange}
+                />
+
+                <span className="login-custom-checkbox">
+                  <Check size={13} strokeWidth={3} />
+                </span>
+
+                <span>Remember me</span>
+              </label>
+
+              {successMessage && (
+                <div className="login-success" role="status">
+                  <CheckCircle2 size={19} />
+                  <span>{successMessage}</span>
+                </div>
+              )}
+
+              {errors.form && (
+                <p className="login-error" role="alert">
+                  {errors.form}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="login-submit-button"
+              >
+                <span>Sign in</span>
+                <ArrowRight size={19} />
+              </button>
+            </form>
+
+            <div className="login-register-prompt">
+              Don't have an account?{" "}
+              <Link to="/register">Create an account</Link>
+            </div>
+
+            <div className="login-security-note">
+              <ShieldCheck size={16} />
+              <span>Your campus journey starts here.</span>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <footer className="login-footer">
+        <span>© {new Date().getFullYear()} Kampusly</span>
+        <span>Campus Life, Simplified.</span>
+      </footer>
+    </main>
+  );
+}
+
+export default Login;
+
+===== FILE: src\pages\public\Register.jsx =====
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+ArrowLeft,
+ArrowRight,
+Eye,
+EyeOff,
+GraduationCap,
+CheckCircle2,
+ShieldCheck,
+ShoppingBag,
+Utensils,
+Shirt,
+ShoppingBasket,
+Check,
+} from "lucide-react";
+
+const initialForm = {
+fullName: "",
+email: "",
+role: "student",
+password: "",
+confirmPassword: "",
+};
+
+const availableRoles = [
+{
+id: "student",
+title: "Student / Buyer",
+description: "Discover services and buy what you need.",
+icon: GraduationCap,
+},
+{
+id: "seller",
+title: "Seller",
+description: "Sell products to your campus community.",
+icon: ShoppingBag,
+},
+{
+id: "food_vendor",
+title: "Food Vendor",
+description: "List meals and receive food orders.",
+icon: Utensils,
+},
+{
+id: "laundry_provider",
+title: "Laundry Service Provider",
+description: "Offer laundry services and manage bookings.",
+icon: Shirt,
+},
+{
+id: "grocery_shopper",
+title: "Grocery Shopper",
+description: "Help students purchase groceries.",
+icon: ShoppingBasket,
+},
+];
+
+function Register() {
+const [form, setForm] = useState(initialForm);
+const [showPassword, setShowPassword] = useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+const [errors, setErrors] = useState({});
+const [successMessage, setSuccessMessage] = useState("");
+
+const handleChange = (event) => {
+const { name, value } = event.target;
+
+
+setForm((previous) => ({
+  ...previous,
+  [name]: value,
+}));
+
+setErrors((previous) => ({
+  ...previous,
+  [name]: "",
+  form: "",
+}));
+
+setSuccessMessage("");
+
+
+};
+
+// A user can select only one role at a time.
+const selectRole = (roleId) => {
+setForm((previous) => ({
+...previous,
+role: roleId,
+}));
+
+
+setErrors((previous) => ({
+  ...previous,
+  role: "",
+  form: "",
+}));
+
+setSuccessMessage("");
+
+
+};
+
+const validateForm = () => {
+const newErrors = {};
+
+
+if (!form.fullName.trim()) {
+  newErrors.fullName = "Please enter your full name.";
+} else if (form.fullName.trim().length < 3) {
+  newErrors.fullName =
+    "Your name must contain at least 3 characters.";
+}
+
+if (!form.email.trim()) {
+  newErrors.email = "Please enter your email address.";
+} else if (
+  !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())
+) {
+  newErrors.email = "Please enter a valid email address.";
+}
+
+if (!form.role) {
+  newErrors.role = "Please select an account role.";
+}
+
+if (!form.password) {
+  newErrors.password = "Please create a password.";
+} else if (form.password.length < 8) {
+  newErrors.password =
+    "Your password must contain at least 8 characters.";
+}
+
+if (!form.confirmPassword) {
+  newErrors.confirmPassword = "Please confirm your password.";
+} else if (form.password !== form.confirmPassword) {
+  newErrors.confirmPassword = "Your passwords do not match.";
+}
+
+return newErrors;
+
+
+};
+
+const handleSubmit = (event) => {
+event.preventDefault();
+
+
+setSuccessMessage("");
+
+const validationErrors = validateForm();
+setErrors(validationErrors);
+
+if (Object.keys(validationErrors).length > 0) {
+  return;
+}
+
+const selectedRole = availableRoles.find(
+  (role) => role.id === form.role
+);
+
+setSuccessMessage(
+  `Your details are valid! Selected role: ${selectedRole.title}. Account creation will be available when registration is connected to the Kampusly server.`
+);
+
+};
+
+return ( <main className="register-page"> <header className="register-header"> <Link
+       to="/"
+       className="register-brand"
+       aria-label="Kampusly home"
+     > <span className="register-brand-icon"> <GraduationCap size={25} strokeWidth={2.2} /> </span>
+
+
+      <span className="register-brand-name">
+        kampusly<span>.</span>
+      </span>
+    </Link>
+
+    <Link to="/" className="register-back-link">
+      <ArrowLeft size={17} />
+      <span>Back to home</span>
+    </Link>
+  </header>
+
+  <section className="register-layout">
+    <aside className="register-intro">
+      <div className="register-intro-badge">
+        <span className="register-badge-dot" />
+        YOUR CAMPUS. YOUR COMMUNITY.
+      </div>
+
+      <h1>
+        Campus life,
+        <br />
+        <span>made easier.</span>
+      </h1>
+
+      <p className="register-intro-description">
+        Meet people, discover opportunities, buy and sell, and
+        get the everyday things you need — all in one place.
+      </p>
+
+      <div className="register-benefits">
+        <div className="register-benefit">
+          <span className="register-benefit-icon">
+            <CheckCircle2 size={19} />
+          </span>
+
+          <div>
+            <strong>One account, more possibilities</strong>
+            <p>Buy, sell, connect, and discover.</p>
+          </div>
+        </div>
+
+        <div className="register-benefit">
+          <span className="register-benefit-icon">
+            <CheckCircle2 size={19} />
+          </span>
+
+          <div>
+            <strong>Made for campus communities</strong>
+            <p>Find what you need from your community.</p>
+          </div>
+        </div>
+
+        <div className="register-benefit">
+          <span className="register-benefit-icon">
+            <ShieldCheck size={19} />
+          </span>
+
+          <div>
+            <strong>Your account, your control</strong>
+            <p>Manage your profile and interactions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="register-quote">
+        <span className="register-quote-mark">“</span>
+        <p>Good things happen when campus connects.</p>
+        <span className="register-quote-line" />
+      </div>
+
+      <div className="register-decoration register-decoration-one" />
+      <div className="register-decoration register-decoration-two" />
+    </aside>
+
+    <section className="register-form-section">
+      <div className="register-form-card">
+        <div className="register-mobile-brand">
+          <span className="register-brand-icon">
+            <GraduationCap size={24} />
+          </span>
+
+          <span className="register-brand-name">
+            kampusly<span>.</span>
+          </span>
+        </div>
+
+        <div className="register-form-heading">
+          <span className="register-step-label">
+            LET'S GET YOU STARTED
+          </span>
+
+          <h2>Create your account</h2>
+
+          <p>
+            Join your campus community. It only takes a minute.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} noValidate>
+          <div className="register-field">
+            <label htmlFor="fullName">Full name</label>
+
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              placeholder="Enter your full name"
+              value={form.fullName}
+              onChange={handleChange}
+              autoComplete="name"
+              aria-invalid={Boolean(errors.fullName)}
+              aria-describedby={
+                errors.fullName ? "fullName-error" : undefined
+              }
+            />
+
+            {errors.fullName && (
+              <span className="register-error" id="fullName-error">
+                {errors.fullName}
+              </span>
+            )}
+          </div>
+
+          <div className="register-field">
+            <label htmlFor="email">Email address</label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              value={form.email}
+              onChange={handleChange}
+              autoComplete="email"
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={
+                errors.email ? "email-error" : undefined
+              }
+            />
+
+            {errors.email && (
+              <span className="register-error" id="email-error">
+                {errors.email}
+              </span>
+            )}
+          </div>
+
+          <div className="register-field register-roles-field">
+            <div className="register-roles-heading">
+              <label id="register-roles-label">
+                How will you use Kampusly?
+              </label>
+
+              <span className="register-roles-optional">
+                Select one role
+              </span>
+            </div>
+
+            <div
+              className="register-roles-grid"
+              role="group"
+              aria-labelledby="register-roles-label"
+              aria-describedby={
+                errors.role ? "role-error" : "role-help"
+              }
+            >
+              {availableRoles.map((role) => {
+                const RoleIcon = role.icon;
+                const isSelected = form.role === role.id;
+
+                return (
+                  <button
+                    key={role.id}
+                    type="button"
+                    className={`register-role-card ${
+                      isSelected ? "register-role-selected" : ""
+                    }`}
+                    onClick={() => selectRole(role.id)}
+                    aria-pressed={isSelected}
+                  >
+                    <span className="register-role-icon">
+                      <RoleIcon size={20} strokeWidth={1.9} />
+                    </span>
+
+                    <span className="register-role-copy">
+                      <strong>{role.title}</strong>
+                      <span>{role.description}</span>
+                    </span>
+
+                    <span className="register-role-check">
+                      {isSelected && (
+                        <Check size={15} strokeWidth={3} />
+                      )}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {errors.role && (
+              <span className="register-error" id="role-error">
+                {errors.role}
+              </span>
+            )}
+
+            <span className="register-field-hint" id="role-help">
+              Choose the role that best describes how you want to
+              start using Kampusly. You can manage your activities
+              from your account.
+            </span>
+
+            <div className="register-admin-note">
+              <ShieldCheck size={16} />
+              <span>
+                Administrator access is assigned separately by
+                Kampusly.
+              </span>
+            </div>
+          </div>
+
+          <div className="register-field">
+            <label htmlFor="password">Password</label>
+
+            <div className="register-password-wrap">
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Create a strong password"
+                value={form.password}
+                onChange={handleChange}
+                autoComplete="new-password"
+                aria-invalid={Boolean(errors.password)}
+                aria-describedby={
+                  errors.password ? "password-error" : undefined
+                }
+              />
+
+              <button
+                type="button"
+                className="register-password-toggle"
+                onClick={() =>
+                  setShowPassword((previous) => !previous)
+                }
+                aria-label={
+                  showPassword ? "Hide password" : "Show password"
+                }
+              >
+                {showPassword ? (
+                  <EyeOff size={19} />
+                ) : (
+                  <Eye size={19} />
+                )}
+              </button>
+            </div>
+
+            {errors.password && (
+              <span className="register-error" id="password-error">
+                {errors.password}
+              </span>
+            )}
+
+            <span className="register-field-hint">
+              Use at least 8 characters.
+            </span>
+          </div>
+
+          <div className="register-field">
+            <label htmlFor="confirmPassword">
+              Confirm password
+            </label>
+
+            <div className="register-password-wrap">
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type={
+                  showConfirmPassword ? "text" : "password"
+                }
+                placeholder="Enter your password again"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                autoComplete="new-password"
+                aria-invalid={Boolean(errors.confirmPassword)}
+                aria-describedby={
+                  errors.confirmPassword
+                    ? "confirmPassword-error"
+                    : undefined
+                }
+              />
+
+              <button
+                type="button"
+                className="register-password-toggle"
+                onClick={() =>
+                  setShowConfirmPassword((previous) => !previous)
+                }
+                aria-label={
+                  showConfirmPassword
+                    ? "Hide password"
+                    : "Show password"
+                }
+              >
+                {showConfirmPassword ? (
+                  <EyeOff size={19} />
+                ) : (
+                  <Eye size={19} />
+                )}
+              </button>
+            </div>
+
+            {errors.confirmPassword && (
+              <span
+                className="register-error"
+                id="confirmPassword-error"
+              >
+                {errors.confirmPassword}
+              </span>
+            )}
+          </div>
+
+          <p className="register-terms">
+            By creating an account, you agree to our{" "}
+            <a href="#terms">Terms of Service</a> and{" "}
+            <a href="#privacy">Privacy Policy</a>.
+          </p>
+
+          {successMessage && (
+            <div className="register-success" role="status">
+              <CheckCircle2 size={19} />
+              <span>{successMessage}</span>
+            </div>
+          )}
+
+          {errors.form && (
+            <p className="register-error" role="alert">
+              {errors.form}
+            </p>
+          )}
+
+          <button
+            type="submit"
+            className="register-submit-button"
+          >
+            <span>Create account</span>
+            <ArrowRight size={19} />
+          </button>
+        </form>
+
+        <div className="register-login-prompt">
+          Already have an account? <Link to="/login">Log in</Link>
+        </div>
+
+        <div className="register-security-note">
+          <ShieldCheck size={16} />
+          <span>Your campus journey starts here.</span>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <footer className="register-footer">
+    <span>© {new Date().getFullYear()} Kampusly</span>
+    <span>Campus Life, Simplified.</span>
+  </footer>
+</main>
+
+
+);
+}
+
+export default Register;
+

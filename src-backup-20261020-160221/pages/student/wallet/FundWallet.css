@@ -1,0 +1,617 @@
+.kfw-page {
+  min-height: 100vh;
+  padding: 38px 24px 60px;
+  background: #f5f7f5;
+  color: #1b2d21;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.kfw-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.kfw-header {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 30px;
+}
+
+.kfw-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 1px solid #e0e8e1;
+  border-radius: 13px;
+  background: #ffffff;
+  color: #244431;
+  cursor: pointer;
+}
+
+.kfw-back-button:hover {
+  background: #eef7ee;
+}
+
+.kfw-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: #6a8872;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.kfw-header h1 {
+  margin: 0;
+  color: #183c28;
+  font-size: clamp(25px, 4vw, 33px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.kfw-header p {
+  margin: 7px 0 0;
+  color: #7d8a80;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.kfw-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 14px;
+  border: 1px solid #c9e6ce;
+  border-radius: 12px;
+  background: #eff9f0;
+  color: #28683b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.kfw-notice > svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.kfw-notice > span {
+  flex: 1;
+}
+
+.kfw-notice button {
+  display: inline-flex;
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.kfw-notice-error {
+  border-color: #f0cebd;
+  background: #fff5ef;
+  color: #9b482a;
+}
+
+.kfw-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(270px, 0.8fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.kfw-main-card,
+.kfw-summary-card,
+.kfw-security-card {
+  border: 1px solid #e6ece6;
+  border-radius: 19px;
+  background: #ffffff;
+}
+
+.kfw-main-card {
+  padding: 27px;
+}
+
+.kfw-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 30px;
+}
+
+.kfw-heading-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 47px;
+  height: 47px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: #e8f5e6;
+  color: #2d7944;
+}
+
+.kfw-card-heading h2 {
+  margin: 0 0 6px;
+  color: #23412d;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.kfw-card-heading p {
+  margin: 0;
+  color: #879187;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.kfw-field-label {
+  display: block;
+  margin-bottom: 10px;
+  color: #354a39;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.kfw-amount-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 17px;
+  border: 1px solid #dce6dd;
+  border-radius: 13px;
+  background: #fbfdfb;
+  transition: border-color 0.2s ease;
+}
+
+.kfw-amount-input-wrap:focus-within {
+  border-color: #448d55;
+}
+
+.kfw-currency-symbol {
+  color: #2c6c3c;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.kfw-amount-input-wrap input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #203b29;
+  font: inherit;
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.kfw-amount-input-wrap input::placeholder {
+  color: #c4cec5;
+}
+
+.kfw-field-help {
+  margin: 9px 0 0;
+  color: #919b92;
+  font-size: 10px;
+}
+
+.kfw-quick-amounts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.kfw-quick-amount {
+  min-height: 39px;
+  padding: 7px 5px;
+  border: 1px solid #e1e9e1;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #54705a;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.kfw-quick-amount:hover,
+.kfw-quick-amount-active {
+  border-color: #3d8b4e;
+  background: #edf8ec;
+  color: #216438;
+}
+
+.kfw-divider {
+  height: 1px;
+  margin: 28px 0;
+  background: #edf0ed;
+}
+
+.kfw-payment-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.kfw-payment-heading h3 {
+  margin: 0;
+  color: #2b4432;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.kfw-payment-heading > span {
+  color: #9aa49b;
+  font-size: 10px;
+}
+
+.kfw-payment-options {
+  display: grid;
+  gap: 11px;
+}
+
+.kfw-payment-option {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #e5ebe5;
+  border-radius: 13px;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.kfw-payment-option:hover {
+  border-color: #b7d4bb;
+}
+
+.kfw-payment-selected {
+  border-color: #428b50;
+  background: #f5fbf4;
+}
+
+.kfw-payment-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #e7f4e6;
+  color: #2f7942;
+}
+
+.kfw-transfer-icon {
+  background: #eaf0ff;
+  color: #496bb6;
+}
+
+.kfw-payment-copy {
+  display: grid;
+  flex: 1;
+  gap: 6px;
+}
+
+.kfw-payment-copy strong {
+  color: #334a38;
+  font-size: 12px;
+}
+
+.kfw-payment-copy small {
+  color: #8a958c;
+  font-size: 10px;
+}
+
+.kfw-radio {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  border: 1.5px solid #c7d3c8;
+  border-radius: 50%;
+}
+
+.kfw-payment-selected .kfw-radio {
+  border: 5px solid #368048;
+}
+
+.kfw-payment-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 20px;
+  padding: 13px;
+  border-radius: 11px;
+  background: #f4f8f3;
+  color: #6b806f;
+}
+
+.kfw-payment-info svg {
+  flex-shrink: 0;
+  color: #50835a;
+}
+
+.kfw-payment-info p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.kfw-submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 49px;
+  margin-top: 24px;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: #1d6638;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.kfw-submit-button:hover:not(:disabled) {
+  background: #164f2c;
+}
+
+.kfw-submit-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.kfw-summary-column {
+  display: grid;
+  gap: 16px;
+}
+
+.kfw-summary-card {
+  padding: 23px;
+}
+
+.kfw-summary-eyebrow {
+  color: #819187;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.kfw-summary-card > h2 {
+  margin: 15px 0 25px;
+  color: #1b462c;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+.kfw-summary-line,
+.kfw-summary-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.kfw-summary-line {
+  margin-bottom: 16px;
+  color: #819087;
+  font-size: 11px;
+}
+
+.kfw-summary-line strong {
+  color: #425b47;
+  font-size: 11px;
+}
+
+.kfw-summary-divider {
+  height: 1px;
+  margin: 20px 0;
+  background: #e9eee9;
+}
+
+.kfw-summary-total {
+  color: #334b39;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.kfw-summary-total strong {
+  color: #1e6337;
+  font-size: 15px;
+  text-align: right;
+}
+
+.kfw-summary-destination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #f2f8f1;
+}
+
+.kfw-destination-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 39px;
+  height: 39px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: #e0f0dc;
+  color: #367846;
+}
+
+.kfw-summary-destination > span:last-child {
+  display: grid;
+  gap: 5px;
+}
+
+.kfw-summary-destination small {
+  color: #87988a;
+  font-size: 10px;
+}
+
+.kfw-summary-destination strong {
+  color: #36573c;
+  font-size: 11px;
+}
+
+.kfw-security-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 19px;
+  background: #f7faf7;
+}
+
+.kfw-security-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: #428354;
+}
+
+.kfw-security-card h3 {
+  margin: 0 0 7px;
+  color: #3c5b42;
+  font-size: 12px;
+}
+
+.kfw-security-card p {
+  margin: 0;
+  color: #819084;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.kfw-cancel-button {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e8e1;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #607465;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kfw-cancel-button:hover {
+  background: #f0f7ef;
+}
+
+@media (max-width: 800px) {
+  .kfw-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .kfw-summary-column {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .kfw-summary-card {
+    grid-row: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .kfw-page {
+    padding: 24px 14px 40px;
+  }
+
+  .kfw-header {
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 23px;
+  }
+
+  .kfw-back-button {
+    width: 39px;
+    height: 39px;
+  }
+
+  .kfw-header h1 {
+    font-size: 24px;
+  }
+
+  .kfw-header p {
+    font-size: 11px;
+  }
+
+  .kfw-main-card {
+    padding: 19px 15px;
+    border-radius: 16px;
+  }
+
+  .kfw-card-heading {
+    align-items: flex-start;
+    gap: 11px;
+    margin-bottom: 24px;
+  }
+
+  .kfw-card-heading h2 {
+    font-size: 15px;
+  }
+
+  .kfw-amount-input-wrap input {
+    font-size: 24px;
+  }
+
+  .kfw-quick-amounts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kfw-payment-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .kfw-payment-option {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .kfw-payment-icon {
+    width: 37px;
+    height: 37px;
+  }
+
+  .kfw-payment-copy strong {
+    font-size: 11px;
+  }
+
+  .kfw-payment-copy small {
+    font-size: 9px;
+  }
+
+  .kfw-summary-column {
+    grid-template-columns: 1fr;
+  }
+
+  .kfw-summary-card {
+    grid-row: auto;
+  }
+}

@@ -1,0 +1,726 @@
+.bank-page {
+  min-height: 100vh;
+  padding: 32px 22px 55px;
+  color: #17251e;
+  background: #f5f7f6;
+}
+
+.bank-container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.bank-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 27px;
+  color: #617067;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bank-back-link:hover {
+  color: #087647;
+}
+
+.bank-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.bank-header-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 57px;
+  height: 57px;
+  border-radius: 16px;
+  color: #087647;
+  background: #e2f4e9;
+}
+
+.bank-eyebrow {
+  margin: 0 0 5px;
+  color: #12824f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.bank-header h1 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.bank-subtitle {
+  margin: 7px 0 0;
+  color: #78857c;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.bank-security-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 23px;
+  padding: 19px;
+  border: 1px solid #dcece1;
+  border-radius: 15px;
+  background: #f0faf3;
+}
+
+.bank-security-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: #087647;
+  background: #dff3e6;
+}
+
+.bank-security-banner h3 {
+  margin: 1px 0 6px;
+  color: #215a39;
+  font-size: 14px;
+}
+
+.bank-security-banner p {
+  margin: 0;
+  color: #64806d;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.bank-security-lock {
+  flex-shrink: 0;
+  margin: 4px 2px 0 auto;
+  color: #58936d;
+}
+
+.bank-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 13px 15px;
+  border: 1px solid #cce8d5;
+  border-radius: 10px;
+  color: #176b3d;
+  background: #effaf2;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.bank-notice > svg {
+  flex-shrink: 0;
+}
+
+.bank-notice > span {
+  flex: 1;
+}
+
+.bank-notice button {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 7px;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bank-notice button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.bank-list-card,
+.bank-form-card {
+  margin-bottom: 22px;
+  padding: 25px;
+  border: 1px solid #e6ece7;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(23, 37, 30, 0.035);
+}
+
+.bank-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 23px;
+}
+
+.bank-list-heading h2,
+.bank-form-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.bank-list-heading p,
+.bank-form-heading p {
+  margin: 7px 0 0;
+  color: #859087;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.bank-add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  background: #087647;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.bank-add-button:hover {
+  background: #06643c;
+  transform: translateY(-1px);
+}
+
+.bank-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 15px 22px;
+  text-align: center;
+}
+
+.bank-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 18px;
+  border-radius: 21px;
+  color: #087647;
+  background: #e8f7ed;
+}
+
+.bank-empty-state h3 {
+  margin: 0 0 9px;
+  font-size: 17px;
+}
+
+.bank-empty-state p {
+  max-width: 360px;
+  margin: 0 0 20px;
+  color: #829087;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.bank-account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.bank-account-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid #e9eeea;
+  border-radius: 13px;
+  background: #fff;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.bank-account-item:hover {
+  border-color: #c8e4d1;
+  background: #fcfefc;
+}
+
+.bank-account-logo {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #dcefe2;
+  border-radius: 13px;
+  color: #087647;
+  background: #eaf7ee;
+}
+
+.bank-account-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.bank-account-details h3 {
+  margin: 0 0 7px;
+  overflow-wrap: anywhere;
+  color: #273a2d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.bank-account-number {
+  margin: 0 0 7px;
+  color: #56675b;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.bank-account-holder {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #859087;
+  font-size: 11px;
+}
+
+.bank-account-holder svg {
+  flex-shrink: 0;
+}
+
+.bank-account-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.bank-edit-button,
+.bank-delete-button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e5ebe6;
+  border-radius: 9px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.bank-edit-button {
+  color: #49725a;
+}
+
+.bank-edit-button:hover {
+  color: #087647;
+  background: #eaf7ee;
+}
+
+.bank-delete-button {
+  color: #b44c4c;
+}
+
+.bank-delete-button:hover {
+  color: #a92d2d;
+  background: #fff0f0;
+}
+
+.bank-form-card {
+  scroll-margin-top: 25px;
+}
+
+.bank-form-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.bank-close-form {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  border-radius: 9px;
+  color: #637267;
+  background: #f1f5f2;
+  cursor: pointer;
+}
+
+.bank-close-form:hover {
+  color: #263b2c;
+  background: #e7eee8;
+}
+
+.bank-form-field {
+  margin-bottom: 22px;
+}
+
+.bank-form-field label {
+  display: block;
+  margin-bottom: 9px;
+  color: #2c3b30;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bank-form-field label span {
+  color: #dc4545;
+}
+
+.bank-form-field input,
+.bank-select-wrap select {
+  width: 100%;
+  min-height: 51px;
+  padding: 13px 14px;
+  border: 1px solid #dfe7e1;
+  border-radius: 10px;
+  outline: none;
+  color: #29382e;
+  background: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bank-form-field input:focus,
+.bank-select-wrap select:focus {
+  border-color: #0b8751;
+  box-shadow: 0 0 0 3px rgba(11, 135, 81, 0.09);
+}
+
+.bank-form-field input::placeholder {
+  color: #a0aaa3;
+}
+
+.bank-select-wrap {
+  position: relative;
+}
+
+.bank-select-wrap > svg {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  z-index: 1;
+  color: #839087;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.bank-select-wrap select {
+  padding-left: 43px;
+  cursor: pointer;
+}
+
+.bank-field-error {
+  border-color: #df5555 !important;
+}
+
+.bank-error-text {
+  margin: 8px 0 0;
+  color: #d33f3f;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.bank-field-hint {
+  margin: 8px 0 0;
+  color: #909b93;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.bank-verification-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin: 4px 0 23px;
+  padding: 15px;
+  border: 1px solid #f0e5c9;
+  border-radius: 11px;
+  color: #8a6a28;
+  background: #fffbf0;
+}
+
+.bank-verification-notice > svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.bank-verification-notice p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.bank-verification-notice strong {
+  display: block;
+  margin-bottom: 3px;
+  color: #72571f;
+}
+
+.bank-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 11px;
+}
+
+.bank-cancel-button,
+.bank-save-button,
+.bank-confirm-delete-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 45px;
+  padding: 12px 19px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.bank-cancel-button {
+  border: 1px solid #dfe7e1;
+  color: #4c5d51;
+  background: #fff;
+}
+
+.bank-cancel-button:hover {
+  background: #f4f7f4;
+}
+
+.bank-save-button {
+  border: 0;
+  color: #fff;
+  background: #087647;
+}
+
+.bank-save-button:hover {
+  background: #06643c;
+}
+
+.bank-footer-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 0 3px;
+  color: #87938a;
+}
+
+.bank-footer-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.bank-footer-note p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.bank-modal-overlay {
+  position: fixed;
+  z-index: 1100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 20px;
+  background: rgba(13, 26, 18, 0.58);
+  backdrop-filter: blur(4px);
+}
+
+.bank-confirm-modal {
+  width: 100%;
+  max-width: 420px;
+  padding: 29px;
+  border: 1px solid #edf1ed;
+  border-radius: 19px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.bank-delete-modal-icon {
+  display: grid;
+  place-items: center;
+  width: 53px;
+  height: 53px;
+  margin-bottom: 18px;
+  border-radius: 15px;
+  color: #b43e3e;
+  background: #fff0f0;
+}
+
+.bank-confirm-modal h2 {
+  margin: 0 0 10px;
+  font-size: 21px;
+}
+
+.bank-confirm-modal > p {
+  margin: 0 0 25px;
+  color: #77847a;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.bank-confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.bank-confirm-actions button {
+  flex: 1;
+}
+
+.bank-confirm-delete-button {
+  border: 0;
+  color: #fff;
+  background: #c43f3f;
+}
+
+.bank-confirm-delete-button:hover {
+  background: #a82f2f;
+}
+
+@media (max-width: 600px) {
+  .bank-page {
+    padding: 22px 14px 38px;
+  }
+
+  .bank-back-link {
+    margin-bottom: 22px;
+  }
+
+  .bank-header {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .bank-header-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+  }
+
+  .bank-header h1 {
+    font-size: 26px;
+  }
+
+  .bank-subtitle {
+    font-size: 12px;
+  }
+
+  .bank-security-banner {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .bank-security-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .bank-security-lock {
+    display: none;
+  }
+
+  .bank-list-card,
+  .bank-form-card {
+    padding: 20px 15px;
+    border-radius: 14px;
+  }
+
+  .bank-list-heading {
+    align-items: flex-start;
+  }
+
+  .bank-list-heading h2,
+  .bank-form-heading h2 {
+    font-size: 16px;
+  }
+
+  .bank-add-button {
+    min-height: 39px;
+    padding: 9px 11px;
+    font-size: 11px;
+  }
+
+  .bank-account-item {
+    align-items: flex-start;
+    gap: 10px;
+    padding: 13px 10px;
+  }
+
+  .bank-account-logo {
+    width: 39px;
+    height: 39px;
+    border-radius: 10px;
+  }
+
+  .bank-account-logo svg {
+    width: 19px;
+  }
+
+  .bank-account-details h3 {
+    font-size: 12px;
+  }
+
+  .bank-account-number {
+    font-size: 12px;
+  }
+
+  .bank-account-holder {
+    font-size: 10px;
+  }
+
+  .bank-account-actions {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .bank-edit-button,
+  .bank-delete-button {
+    width: 31px;
+    height: 31px;
+  }
+
+  .bank-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .bank-form-actions button {
+    width: 100%;
+  }
+
+  .bank-confirm-modal {
+    padding: 23px 19px;
+  }
+
+  .bank-confirm-actions {
+    flex-direction: column-reverse;
+  }
+}
